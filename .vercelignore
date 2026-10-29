@@ -1,0 +1,10 @@
+# Prevent Vercel from treating this repository as a Python project
+# The Python backend runs on Render, while Vercel hosts the static frontend.
+requirements.txt
+app.py
+finshield/python/
+finshield/serve.py
+__pycache__/
+*.py
+*.pyc
+render.yaml

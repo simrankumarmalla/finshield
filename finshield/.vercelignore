@@ -1,0 +1,6 @@
+# Ignore Python scripts from Vercel deployment if Root Directory is set to finshield
+python/
+serve.py
+__pycache__/
+*.py
+*.pyc

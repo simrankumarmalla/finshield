@@ -43,6 +43,10 @@ FinShield runs 100% in the user's browser, making Vercel the ideal hosting platf
 
 7. In about 30 seconds, your site will be live at `https://scam-finder-asa.vercel.app` (or your chosen project name)!
 
+> [!NOTE]
+> **Why `.vercelignore` is included**:
+> Because the project contains a Python backend for Render (`app.py` & `requirements.txt`), `.vercelignore` tells Vercel to bypass Python serverless function compilation and deploy FinShield purely as a fast, client-side static web application.
+
 ---
 
 ## Part 2: Deploy on Render
