@@ -1,0 +1,122 @@
+:root {
+  --navy: #0f2142;
+  --navy-2: #1b3563;
+  --slate: #e9edf4;
+  --ink: #1c2433;
+  --muted: #5b6678;
+  --white: #ffffff;
+  --safe: #1e8e5a;
+  --safe-bg: #e6f5ed;
+  --warn: #b86e00;
+  --warn-bg: #fff3dc;
+  --danger: #c62828;
+  --danger-bg: #fdeaea;
+  --radius: 10px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+  background: var(--slate);
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+
+.top { background: var(--navy); color: var(--white); padding: 32px 0 28px; }
+.top h1 { margin: 0 0 6px; font-size: 2rem; letter-spacing: -0.02em; }
+.tagline { margin: 0 0 14px; color: #c9d4ea; font-size: 1.05rem; }
+.privacy {
+  display: inline-block; margin: 0; padding: 6px 12px;
+  background: var(--navy-2); border-radius: 999px; font-size: 0.9rem;
+}
+
+main { padding-top: 24px; padding-bottom: 8px; }
+
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 3px rgba(15, 33, 66, 0.12);
+}
+.card h2 { margin: 0 0 14px; font-size: 1.25rem; }
+.card h3 { margin: 20px 0 8px; font-size: 1rem; }
+
+.model-status {
+  margin: 0 0 14px; padding: 8px 12px; border-radius: 8px; font-size: 0.9rem;
+  background: var(--slate); color: var(--muted);
+}
+.model-status.ready { background: var(--safe-bg); color: var(--safe); }
+.model-status.failed { background: var(--warn-bg); color: var(--warn); }
+
+.presets { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+.chip {
+  border: 1px solid #c4cde0; background: var(--white); color: var(--navy);
+  padding: 8px 14px; border-radius: 999px; cursor: pointer; font-size: 0.9rem;
+}
+.chip:hover { background: var(--slate); }
+
+textarea {
+  width: 100%; font: inherit; color: var(--ink);
+  border: 1px solid #c4cde0; border-radius: 8px; padding: 12px;
+  resize: vertical; min-height: 130px; margin-bottom: 14px;
+}
+
+.primary {
+  width: 100%; padding: 14px; border: 0; border-radius: 8px;
+  background: var(--navy); color: var(--white); font-size: 1rem; font-weight: 600; cursor: pointer;
+}
+.primary:hover { background: var(--navy-2); }
+.primary:disabled { opacity: 0.6; cursor: wait; }
+
+:focus-visible { outline: 3px solid #4d8dff; outline-offset: 2px; }
+
+.hidden { display: none; }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+.result { border-left: 8px solid var(--muted); }
+.result.safe { border-left-color: var(--safe); background: var(--safe-bg); }
+.result.warn { border-left-color: var(--warn); background: var(--warn-bg); }
+.result.danger { border-left-color: var(--danger); background: var(--danger-bg); }
+
+.verdict-row { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; }
+.label { margin: 0; font-size: 0.85rem; color: var(--muted); }
+#verdict { margin: 0; font-size: 1.6rem; }
+.result.safe #verdict { color: var(--safe); }
+.result.warn #verdict { color: var(--warn); }
+.result.danger #verdict { color: var(--danger); }
+
+.score { text-align: right; }
+.score span { font-size: 2.4rem; font-weight: 700; line-height: 1; }
+.score small { display: block; color: var(--muted); }
+
+.meter { height: 12px; background: rgba(0,0,0,0.1); border-radius: 999px; margin: 16px 0 10px; overflow: hidden; }
+#meterFill { height: 100%; width: 0; background: var(--muted); transition: width 0.5s ease; }
+.result.safe #meterFill { background: var(--safe); }
+.result.warn #meterFill { background: var(--warn); }
+.result.danger #meterFill { background: var(--danger); }
+
+.ai-line { margin: 0; color: var(--muted); font-size: 0.9rem; }
+
+#flags { margin: 0; padding-left: 20px; }
+#flags li { margin-bottom: 6px; }
+
+.foot { padding: 8px 20px 40px; color: var(--muted); font-size: 0.85rem; }
+.foot a { color: var(--navy-2); }
+
+@media (max-width: 520px) {
+  .card { padding: 18px; }
+  .verdict-row { flex-direction: column; align-items: flex-start; }
+  .score { text-align: left; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #meterFill { transition: none; }
+}

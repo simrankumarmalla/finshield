@@ -1,0 +1,15 @@
+{
+  "name": "finshield",
+  "version": "1.0.0",
+  "description": "Privacy-first banking SMS and UPI scam detector using an open-source model in the browser",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "serve": "python serve.py"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0"
+  }
+}

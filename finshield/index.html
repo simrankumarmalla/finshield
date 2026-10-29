@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FinShield – Banking SMS & UPI Scam Detector</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <div class="wrap">
+      <h1>SCAM FINDER ASA</h1>
+      <p class="tagline">Paste a bank SMS, email or payment link. Find out if it's a scam.</p>
+      <p class="privacy">🔒 Nothing you paste is stored or sent anywhere. The open-source model runs inside your browser.</p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="card" aria-labelledby="check-title">
+      <h2 id="check-title">Check a message</h2>
+
+      <p id="modelStatus" class="model-status loading" role="status">Starting open-source model…</p>
+
+      <div class="presets" role="group" aria-label="Sample messages">
+        <button type="button" class="chip" data-preset="kyc">Fake KYC block SMS</button>
+        <button type="button" class="chip" data-preset="upi">Fake UPI lottery link</button>
+        <button type="button" class="chip" data-preset="real">Real bank OTP alert</button>
+      </div>
+
+      <label for="msg" class="sr-only">Message to check</label>
+      <textarea id="msg" rows="6" placeholder="Paste the message here…"></textarea>
+
+      <button id="analyze" class="primary" type="button">Analyze message</button>
+    </section>
+
+    <section id="result" class="card result hidden" aria-live="polite">
+      <div class="verdict-row">
+        <div>
+          <p class="label">Verdict</p>
+          <h2 id="verdict">–</h2>
+        </div>
+        <div class="score">
+          <span id="scoreNum">0</span><small>/100 risk</small>
+        </div>
+      </div>
+
+      <div class="meter" aria-hidden="true"><div id="meterFill"></div></div>
+
+      <p id="aiLine" class="ai-line"></p>
+
+      <h3>Why</h3>
+      <ul id="flags"></ul>
+    </section>
+  </main>
+
+  <footer class="wrap foot">
+    <p><strong>Open-source model.</strong> <a href="https://huggingface.co/Xenova/mobilebert-uncased-mnli" target="_blank" rel="noopener">Xenova/mobilebert-uncased-mnli</a> (ONNX conversion of MobileBERT fine-tuned on MNLI), run in the browser with <a href="https://github.com/huggingface/transformers.js" target="_blank" rel="noopener">Transformers.js</a> (Apache-2.0).</p>
+    <p><strong>How it decides.</strong> The model's score is combined with banking-specific rule checks written for this project. Both are shown so you can see why a message was flagged.</p>
+    <p><strong>Disclaimer.</strong> Results are advisory. Never share your OTP, UPI PIN or CVV with anyone, including bank staff.</p>
+    <p><strong>Tools used.</strong> Built with help from an AI coding assistant (Claude by Anthropic). No external icon libraries.</p>
+  </footer>
+
+  <script type="module" src="dist/main.js"></script>
+</body>
+</html>
