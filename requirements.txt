@@ -1,0 +1,8 @@
+# Core REST API for Render Web Service (lightweight, runs within 512MB free tier limit)
+fastapi>=0.110.0
+uvicorn>=0.29.0
+pydantic>=2.6.0
+
+# Optional: Uncomment below if your Render plan has >= 1GB RAM and you want server-side PyTorch ML
+# transformers>=4.40.0
+# torch>=2.2.0 --extra-index-url https://download.pytorch.org/whl/cpu

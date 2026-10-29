@@ -98,8 +98,8 @@ def load_model():
     if _classifier is None:
         try:
             from transformers import pipeline
-        except ImportError:
-            raise SystemExit("Install the model libraries first:  pip install -r requirements.txt")
+        except ImportError as err:
+            raise RuntimeError("Install the model libraries first: pip install -r requirements.txt") from err
         print(f"Loading open-source model {MODEL_ID} (first run downloads it)...")
         _classifier = pipeline("zero-shot-classification", model=MODEL_ID)
     return _classifier

@@ -59,6 +59,11 @@ python finshield.py --preset upi --no-model     # rules only
 python test_rules.py                            # rule checks
 ```
 
+## Deployment (Vercel & Render)
+See [DEPLOYMENT.md](../DEPLOYMENT.md) for full step-by-step instructions.
+- **Vercel**: Deploy the privacy-first frontend directly (configured via `vercel.json`).
+- **Render**: Deploy the Python REST API (`app.py`) as a Web Service or deploy the frontend as a Static Site (configured via `render.yaml`).
+
 ## Deploy on GitHub Pages
 Push the repo, then Settings > Pages > Deploy from branch `main`, folder `/ (root)`.
 

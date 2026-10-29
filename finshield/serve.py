@@ -4,8 +4,12 @@ Browsers block ES modules and model downloads when a page is opened by
 double-clicking the file, so run this instead:   python serve.py
 """
 import http.server
+import os
 import socketserver
 import webbrowser
+
+# Ensure working directory is the finshield directory
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 PORT = 8000
 
