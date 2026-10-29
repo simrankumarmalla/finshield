@@ -8,7 +8,7 @@ This guide provides exact step-by-step instructions to deploy **FinShield (SCAM-
 
 | Component | Platform | Service Type | What it runs |
 | :--- | :--- | :--- | :--- |
-| **Web Frontend** | **Vercel** *(or Render)* | Static Site | Privacy-first browser app with client-side AI (Transformers.js ONNX) |
+| **Web Frontend** | **Vercel** | Static Site | Privacy-first browser app with client-side AI (Transformers.js ONNX) |
 | **Backend API** | **Render** | Python Web Service | FastAPI REST API (`/analyze`, `/presets`, `/docs`) |
 
 ---
@@ -17,12 +17,12 @@ This guide provides exact step-by-step instructions to deploy **FinShield (SCAM-
 
 FinShield runs 100% in the user's browser, making Vercel the ideal hosting platform (fast global CDN, HTTPS, automatic preview branches).
 
-### Option A: Deploy via Vercel Dashboard (Recommended)
+### Deploy via Vercel Dashboard
 
-1. **Push your code to GitHub** (if not already done):
+1. Push the project to GitHub if it is not already there:
    ```bash
    git add .
-   git commit -m "Add Vercel and Render deployment configurations"
+   git commit -m "Prepare Vercel and Render deployment"
    git push origin main
    ```
 
@@ -34,7 +34,7 @@ FinShield runs 100% in the user's browser, making Vercel the ideal hosting platf
 
 5. **Configure Project Settings**:
    - **Framework Preset**: Select `Other` (or leave default).
-   - **Root Directory**: Leave as `./` (the included `vercel.json` automatically serves the `finshield` folder) — *or* click "Edit" and choose `finshield`.
+   - **Root Directory**: Leave as `./`. The root `vercel.json` serves the `finshield` folder. Alternatively, select `finshield` as the root directory and use its local Vercel config.
    - **Build & Output Settings**:
      - Build Command: Leave blank (static files in `dist/` are pre-compiled).
      - Output Directory: Leave blank (controlled by `vercel.json`).
@@ -49,32 +49,17 @@ FinShield runs 100% in the user's browser, making Vercel the ideal hosting platf
 
 ---
 
-## Part 2: Deploy on Render
+## Part 2: Deploy the Backend on Render
 
-Render gives you two deployment options:
-1. **Python Web Service (FastAPI Backend API)** for programmatic scam detection.
-2. **Static Site (Frontend)** if you prefer to host the web app on Render as well.
-
----
-
-### Option A: 1-Click Render Blueprint (Deploys Both Backend & Frontend)
-
-This repository includes a `render.yaml` blueprint file.
+The Render Blueprint in this repository deploys the Python REST API only. The frontend is hosted on Vercel.
 
 1. Go to **[dashboard.render.com](https://dashboard.render.com)** and log in.
 2. Click **"New +"** in the top navigation bar and select **"Blueprint"**.
 3. Connect your GitHub repository **`SCAM-FINDER-ASA`**.
-4. Render will read `render.yaml` and configure:
-   - `finshield-api` (Python Web Service)
-   - `finshield-web` (Frontend Static Site)
-5. Click **"Apply"** to deploy!
+4. Render reads `render.yaml` and configures `finshield-api` as a Python Web Service.
+5. Click **"Apply"** to deploy.
 
----
-
-### Option B: Deploy Python Backend API Manually (Render Web Service)
-
-Use this if you want to deploy only the backend REST API:
-
+To configure the API manually instead:
 1. In the Render Dashboard, click **"New +"** > **"Web Service"**.
 2. Select your repository `SCAM-FINDER-ASA`.
 3. Set the following options:
@@ -110,24 +95,12 @@ curl -X POST "https://your-api.onrender.com/analyze" \
 
 ---
 
-### Option C: Deploy Frontend Manually on Render (Static Site)
-
-1. In the Render Dashboard, click **"New +"** > **"Static Site"**.
-2. Select your repository `SCAM-FINDER-ASA`.
-3. Set the following fields:
-   - **Name**: `finshield-web`
-   - **Branch**: `main`
-   - **Root Directory**: `finshield`
-   - **Build Command**: *(leave empty)*
-   - **Publish Directory**: `.`
-4. Click **"Create Static Site"**.
-
 ---
 
 ## 🛠️ Verification Checklist
 
 - [x] **Vercel Config**: `vercel.json` created at project root and inside `finshield/`.
-- [x] **Render Blueprint**: `render.yaml` configured with both Web Service and Static Site definitions.
+- [x] **Render Blueprint**: `render.yaml` configures the backend Web Service only.
 - [x] **Python REST API**: `app.py` created with FastAPI, CORS enabled, Swagger `/docs`, and fallback error handling.
 - [x] **Lightweight Dependencies**: `requirements.txt` configured to ensure clean, crash-free builds on Render's 512MB free tier.
 - [x] **Local Server Script**: `finshield/serve.py` updated to run seamlessly regardless of working directory.
