@@ -8,11 +8,10 @@ import os
 import sys
 from typing import List, Optional
 
-# Ensure finshield/python is in sys.path
+# Ensure current directory is in sys.path
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-FINSHIELD_PY_DIR = os.path.join(BASE_DIR, "finshield", "python")
-if FINSHIELD_PY_DIR not in sys.path:
-    sys.path.insert(0, FINSHIELD_PY_DIR)
+if BASE_DIR not in sys.path:
+    sys.path.insert(0, BASE_DIR)
 
 from finshield import analyze, run_rules, verdict, PRESETS, MODEL_ID
 from fastapi import FastAPI, HTTPException, Query

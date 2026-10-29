@@ -24,16 +24,18 @@ People also hesitate to paste financial messages into cloud tools. FinShield run
 
 ## Project layout
 ```
-finshield/
-  index.html          page
-  style.css           styling
-  src/                TypeScript source (rules.ts, model.ts, main.ts)
-  dist/               compiled JavaScript the page loads (rebuild with npm run build)
-  python/             command-line version using the same rules and model
-  serve.py            tiny local web server
+index.html          web page (Vercel static frontend)
+style.css           styling
+src/                TypeScript source (rules.ts, model.ts, main.ts)
+dist/               compiled JavaScript the page loads (rebuild with npm run build)
+backend/            Python REST API (FastAPI) & scam detection engine (Render)
+serve.py            tiny local web server
+render.yaml         Render blueprint deployment
+vercel.json         Vercel static deployment
+DEPLOYMENT.md       Step-by-step Vercel & Render deployment guide
 ```
 
-## Run the web app
+## Run the web app locally
 Browsers block ES modules and model downloads on `file://` pages, so use a local server:
 ```
 python serve.py
@@ -41,28 +43,18 @@ python serve.py
 It opens http://localhost:8000. The first load downloads the model (a few tens of MB) and caches it.
 An internet connection is needed for that first download only.
 
-## Edit the TypeScript
+## Run the Python backend locally
 ```
-npm install
-npm run build        # compiles src/*.ts to dist/*.js
-```
-`dist/` is committed so the app runs without Node.js. To try another open model, change `MODEL_ID` and
-`MODEL_TASK` at the top of `src/model.ts`, then rebuild.
-
-## Run the Python version
-```
-cd python
+cd backend
 pip install -r requirements.txt
-python finshield.py --preset kyc
-python finshield.py --text "Your account is blocked, share OTP now"
-python finshield.py --preset upi --no-model     # rules only
-python test_rules.py                            # rule checks
+uvicorn app:app --reload
 ```
+Opens interactive API docs at http://localhost:8000/docs.
 
 ## Deployment (Vercel & Render)
-See [DEPLOYMENT.md](../DEPLOYMENT.md) for full step-by-step instructions.
-- **Vercel**: Deploy the privacy-first frontend directly (configured via `vercel.json`).
-- **Render**: Deploy the Python REST API (`app.py`) as a Web Service or deploy the frontend as a Static Site (configured via `render.yaml`).
+See [DEPLOYMENT.md](DEPLOYMENT.md) for step-by-step instructions.
+- **Frontend**: Deploy on **Vercel** with 1 click (static browser AI).
+- **Backend**: Deploy on **Render** as a Python Web Service.
 
 ## Deploy on GitHub Pages
 Push the repo, then Settings > Pages > Deploy from branch `main`, folder `/ (root)`.
